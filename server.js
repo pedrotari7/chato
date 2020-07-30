@@ -29,6 +29,10 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get("/", () => {
+  app.get("/", (req, res, next) => res.send("Hello world!"));
+});
+
 app.use("/peerjs", peerServer);
 
 peerServer.on("connection", (client) => {
