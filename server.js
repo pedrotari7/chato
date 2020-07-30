@@ -41,7 +41,7 @@ peerServer.on("disconnect", (client) => {
   console.log("peerServer disconnect");
 });
 
-server.listen(9000);
+server.listen(process.env.PORT || 9000);
 
 app.use(cors());
 app.use(express.json());
