@@ -1,12 +1,24 @@
-const socket = io.connect("http://localhost:9000/");
-const videoGrid = document.getElementById("video-grid");
+let socket;
+let myPeer;
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+  socket = io.connect("http://localhost:9000/");
+  myPeer = new Peer(undefined, {
+    host: "localhost",
+    path: "peerjs",
+    port: 9000,
+    proxied: true,
+  });
+} else {
+  socket = io.connect("https://chato-123.herokuapp.com");
+  myPeer = new Peer(undefined, {
+    host: "chato-123.herokuapp.com",
+    secure: true,
+    path: "peerjs",
+    proxied: true,
+  });
+}
 
-const myPeer = new Peer(undefined, {
-  host: "localhost",
-  port: 9000,
-  path: "peerjs",
-  proxied: true,
-});
+const videoGrid = document.getElementById("video-grid");
 
 const myVideo = document.createElement("video");
 myVideo.muted = true;
