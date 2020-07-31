@@ -24,6 +24,7 @@ const peerConfig = isLocalhost
       port: 9000,
       proxied: true,
       config: iceServers,
+      debug: 1,
     }
   : {
       host: 'chato-123.herokuapp.com',
@@ -58,6 +59,10 @@ socket.on('connect', () => {
 
         addVideoStream(video, userVideoStream);
       });
+
+      call.on('error', (error) => {
+        console.log('error', error);
+      });
     });
 
     socket.on('user-connected', (userId) => {
@@ -84,6 +89,7 @@ const connectToNewUser = (userId, stream) => {
   const video = document.createElement('video');
   call.on('stream', (userVideoStream) => {
     console.log('new stream', userVideoStream);
+    console.log('getTracks', userVideoStream.getVideoTracks()[0].getSettings());
     addVideoStream(video, userVideoStream);
   });
   call.on('close', () => {
