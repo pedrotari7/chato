@@ -1,16 +1,68 @@
-body {
+body,
+html {
   background-color: #333333;
   color: wheat;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  padding: 0 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 #video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
-  grid-auto-rows: 300px;
+  justify-content: center;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+h1 {
+  position: relative;
+  z-index: 1;
+  font-weight: 900;
 }
 
 video {
-  width: 100%;
+  z-index: 0;
+  cursor: pointer;
   height: 100%;
+  max-width: 100%;
+  margin: 0 1em;
   object-fit: cover;
+  border: 5px solid wheat;
+  border-radius: 1rem;
+  /* margin: 1em; */
+}
+
+#my-video {
+  position: absolute;
+  bottom: 1em;
+  right: 0.5em;
+  z-index: 20;
+  height: 20vh;
+  width: 20vh;
+}
+
+#control-panel {
+  background-color: wheat;
+  height: 0rem;
+}
+
+select {
+  display: none;
+  margin-left: 5rem;
 }

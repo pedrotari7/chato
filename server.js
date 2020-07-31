@@ -1,44 +1,44 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
+const cors = require('cors');
 
-const { ExpressPeerServer } = require("peer");
+const { ExpressPeerServer } = require('peer');
 
-const server = require("http").Server(app);
+const server = require('http').Server(app);
 
-const io = require("socket.io")(server);
+const io = require('socket.io')(server);
 
 const peerServer = ExpressPeerServer(server, {
   debug: true,
-  path: "/",
+  path: '/',
 });
 
 const roomId = 1;
 
-io.on("connection", (socket) => {
-  console.log("user connected");
-  socket.on("join-room", (userId) => {
-    console.log("join-room", userId);
+io.on('connection', (socket) => {
+  console.log('user connected');
+  socket.on('join-room', (userId) => {
+    console.log('join-room', userId);
     socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected", userId);
+    socket.to(roomId).broadcast.emit('user-connected', userId);
 
-    socket.on("disconnect", () => {
-      console.log("user disconnected");
-      socket.to(roomId).broadcast.emit("user-disconnected", userId);
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+      socket.to(roomId).broadcast.emit('user-disconnected', userId);
     });
   });
 });
 
-app.get("/", (req, res, next) => res.send("Hello world!"));
+app.get('/', (req, res, next) => res.send('Hello world!'));
 
-app.use("/peerjs", peerServer);
+app.use('/peerjs', peerServer);
 
-peerServer.on("connection", (client) => {
-  console.log("peerServer connection");
+peerServer.on('connection', (client) => {
+  console.log('peerServer connection');
 });
 
-peerServer.on("disconnect", (client) => {
-  console.log("peerServer disconnect");
+peerServer.on('disconnect', (client) => {
+  console.log('peerServer disconnect');
 });
 
 server.listen(process.env.PORT || 9000);
