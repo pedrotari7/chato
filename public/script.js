@@ -13,12 +13,14 @@ const peerConfig = isLocalhost
       path: 'peerjs',
       port: 9000,
       proxied: true,
+      iceServers: [{ url: 'stun:stun.l.google.com:19302' }],
     }
   : {
       host: 'chato-123.herokuapp.com',
       secure: true,
       path: 'peerjs',
       proxied: true,
+      iceServers: [{ url: 'stun:stun.l.google.com:19302' }],
     };
 
 let myPeer;
