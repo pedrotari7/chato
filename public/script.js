@@ -20,7 +20,7 @@ const peerConfig = isLocalhost
       secure: true,
       path: 'peerjs',
       proxied: true,
-      iceServers: [{ url: 'stun:stun.l.google.com:19302' }],
+      config: { iceServers: [{ url: 'stun:stun.l.google.com:19302' }] },
     };
 
 let myPeer;
