@@ -7,20 +7,31 @@ const socketUrl = isLocalhost ? 'http://localhost:9000/' : 'https://chato-123.he
 
 const socket = io.connect(socketUrl);
 
+const iceServers = {
+  iceServers: [
+    { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: 'stun:stun2.l.google.com:19302' },
+    { urls: 'stun:stun3.l.google.com:19302' },
+    { urls: 'stun:stun4.l.google.com:19302' },
+  ],
+};
+
 const peerConfig = isLocalhost
   ? {
       host: 'localhost',
       path: 'peerjs',
       port: 9000,
       proxied: true,
-      iceServers: [{ url: 'stun:stun.l.google.com:19302' }],
+      config: iceServers,
     }
   : {
       host: 'chato-123.herokuapp.com',
       secure: true,
       path: 'peerjs',
       proxied: true,
-      config: { iceServers: [{ url: 'stun:stun.l.google.com:19302' }] },
+      config: iceServers,
+      debug: 3,
     };
 
 let myPeer;
